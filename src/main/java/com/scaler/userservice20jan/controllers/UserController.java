@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Random;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -13,6 +15,16 @@ public class UserController {
     // GET /users/1
     @GetMapping("/{id}")
     public User getUserDetails(@PathVariable("id") Long id) {
-        return new User();
+        System.out.println("got a request");
+        User user = new User();
+        int randInt = new Random().nextInt();
+
+        if (randInt % 2 == 0) {
+            user.setAdmin(true);
+        } else {
+            user.setAdmin(false);
+        }
+
+        return user;
     }
 }
